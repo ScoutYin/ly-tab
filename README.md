@@ -26,7 +26,6 @@ import LyTab from 'ly-tab';
 Vue.use(LyTab);
 ```
 
-```
 ## Example
 
 ```html

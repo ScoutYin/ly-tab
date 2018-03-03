@@ -13,7 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "ly-tab": "^1.0.1",
+    "ly-tab": "^1.0.2",
     "mint-ui": "^2.2.13",
     "style-loader": "^0.20.2",
     "vue": "^2.5.2"
