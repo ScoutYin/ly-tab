@@ -10,13 +10,12 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --open --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "ly-tab": "^1.0.1",
+    "mint-ui": "^2.2.13",
     "style-loader": "^0.20.2",
-    "ly-tab": "^1.0.0",
     "vue": "^2.5.2"
   },
   "devDependencies": {
@@ -47,7 +46,6 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
     "node-notifier": "^5.1.2",
-    "node-sass": "^4.7.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
     "portfinder": "^1.0.13",

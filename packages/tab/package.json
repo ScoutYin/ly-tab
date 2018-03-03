@@ -1,0 +1,31 @@
+{
+  "name": "ly-tab",
+  "version": "1.0.1",
+  "description": "A better mobile touch-swappable reusable component for vue2.*",
+  "author": "ScoutYin <yinbin_web@163.com>",
+  "contributors": [
+    "ScoutYin <yinbin_web@163.com>",
+    "lyh2668 <lyh2668@163.com>"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScoutYin/ly-tab.git"
+  },
+  "keywords": [
+    "Vue",
+    "component",
+    "mobile",
+    "swap",
+    "reusable"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ScoutYin/ly-tab/issues"
+  },
+  "homepage": "https://github.com/ScoutYin/ly-tab#readme"
+}

@@ -1,4 +1,3 @@
-
 # Ly-tab
 
 > A better mobile touch-swappable reusable component for **Vue 2.0**
@@ -8,8 +7,6 @@
  **demo效果**
  
  ![image](https://raw.githubusercontent.com/ScoutYin/Image-Resource/master/images/ly-tab.gif)
- 
- clone该仓库到本地可查看演示demo
 
 ## Installation
 ```shell
@@ -26,7 +23,6 @@ import LyTab from 'ly-tab';
 Vue.use(LyTab);
 ```
 
-```
 ## Example
 
 ```html
@@ -51,23 +47,11 @@ Vue.use(LyTab);
  sensitivity | Number | 惯性滑动时的灵敏度(值越小，阻力越大),可近似认为手松开后速度减为零所需时间 | 1000ms 
  reBoundingDuration | Number | 回弹动画duration | 360ms 
 
+## Repository
 
-## Build Setup
+github：
+[https://github.com/ScoutYin/ly-tab.git](https://github.com/ScoutYin/ly-tab.git)
 
-
-```bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
 
 
 ## License

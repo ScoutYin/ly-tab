@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <!-- 通过拆解v-model语法糖实现双向传递 -->
     <ly-tab :value="selected" @input="changeSelected" activeColor="#1d98bd">
       <ly-tab-item v-for="(item, index) in tabList" :key="index">
@@ -18,14 +18,13 @@
 </template>
 
 <script>
-import { LyTab, LyTabItem } from './components/tab'
 // import { LyTab, LyTabItem } from 'ly-tab'
 
 export default {
-  name: 'App',
+  name: 'Demo',
   components: {
-    LyTab,
-    LyTabItem
+    // LyTab,
+    // LyTabItem
   },
   data () {
     return {
@@ -33,6 +32,7 @@ export default {
       selectedFixed: 0,
       tabList: [
         {itemName: '首页'},
+        {itemName: '推荐'},
         {itemName: 'Android'},
         {itemName: '前端'},
         {itemName: '后端'},
@@ -57,12 +57,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<style>
+
 </style>

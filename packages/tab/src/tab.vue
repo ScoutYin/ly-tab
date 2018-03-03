@@ -13,10 +13,10 @@
  * ly-tab
  * @desc 依赖 tab-item
  * @param {Boolean} fixBottom - 固定底部
- * @param {Number} value - 返回 item component 传入的 id
+ * @param {*} value - 返回 item component 传入的 id
  *
  * @example
- * <ly-tab v-model="selected">
+ * <ly-tab v-model="selected"> // v-model只是一个双向绑定的语法糖
       <ly-tab-item v-for="(item, index) in tabList" :key="index">
         {{item.itemName}}
       </ly-tab-item>
@@ -39,12 +39,27 @@ export default {
       type: Boolean,
       default: false
     },
-    value: Number,
-    options: {
-      type: Object,
-      default () {
-        return {}
-      }
+    value: {},
+
+    // 近似等于超出边界时最大可拖动距离(px);
+    additionalX: {
+      type: Number,
+      default: 50
+    },
+    // 惯性回弹指数(值越大，幅度越大，惯性回弹距离越长);
+    reBoundExponent: {
+      type: Number,
+      default: 10
+    },
+    // 灵敏度(惯性滑动时的灵敏度,值越小，阻力越大),可近似认为速度减为零所需的时间(ms);
+    sensitivity: {
+      type: Number,
+      default: 1000
+    },
+    // 回弹过程duration;
+    reBoundingDuration: {
+      type: Number,
+      default: 360
     }
   },
   computed: {
@@ -60,7 +75,7 @@ export default {
         return '0'
       }
       if (this.reBounding && !this.touching) {
-        return this.opts.reBoundingDuration
+        return this.reBoundingDuration
       }
     },
     transitionTimingFunction () {
@@ -74,16 +89,12 @@ export default {
     listWidth () {
       return this.$refs.list.offsetWidth - this.viewAreaWidth
     },
-    // 最终参数;
-    opts () {
-      return Object.assign({}, this.defaultOptions, this.options)
-    },
     // 是否向左惯性滚动;
     isMoveLeft () {
-      return this.speed <= 0
+      return this.currentX <= this.startX
     },
     isMoveRight () {
-      return this.speed >= 0
+      return this.currentX >= this.startX
     }
   },
   data () {
@@ -99,19 +110,8 @@ export default {
       frameStartTime: 0,
       frameEndTime: 0,
       inertiaFrame: 0,
-      touchFrame: 0,
       zeroSpeed: 0.001, // 当speed绝对值小于该值时认为速度为0 (可用于控制惯性滚动结束期的顺滑度)
       acceleration: 0, // 惯性滑动加速度;
-      defaultOptions: {
-        // 近似等于超出边界时最大可拖动距离(px);
-        additionalX: 50,
-        // 惯性回弹指数(值越大，幅度越大，惯性回弹距离越长);
-        reBoundExponent: 10,
-        // 灵敏度(惯性滑动时的灵敏度,值越小，阻力越大),可近似认为速度减为零所需的时间(ms);
-        sensitivity: 1000,
-        // 回弹过程duration;
-        reBoundingDuration: 360
-      }
     }
   },
   mounted () {
@@ -124,9 +124,7 @@ export default {
     // start
     handleTouchStart (event) {
       cancelAnimationFrame(this.inertiaFrame)
-      cancelAnimationFrame(this.touchFrame)
-      this.startX = event.touches[0].clientX
-      this.lastX = event.touches[0].clientX
+      this.startX = this.lastX = event.touches[0].clientX
       this.lastMoveStamp = event.timeStamp
     },
     // move
@@ -139,7 +137,7 @@ export default {
       this.touching = true
       this.startMoveTime = this.endMoveTime
       this.currentX = event.touches[0].clientX
-      this.touchFrame = requestAnimationFrame(this.moveFellowTouch)
+      this.moveFellowTouch()
       this.endMoveTime = event.timeStamp // 每次触发touchmove事件的时间戳;
     },
     // end
@@ -147,22 +145,17 @@ export default {
       this.touching = false
       if (this.checkReboundX()) {
         cancelAnimationFrame(this.inertiaFrame)
-        cancelAnimationFrame(this.touchFrame)
       } else {
         let silenceTime = event.timeStamp - this.endMoveTime
         let timeStamp = this.endMoveTime - this.startMoveTime
-        if (silenceTime > 100) { // 停顿时间超过100ms不产生惯性滑动;
+        if (silenceTime > 300) { // 停顿时间超过100ms不产生惯性滑动;
           return
         }
         this.speed = (this.lastX - this.startX) / (timeStamp)
-        this.acceleration = this.speed / this.opts.sensitivity
+        this.acceleration = this.speed / this.sensitivity
         this.frameStartTime = new Date().getTime()
         this.inertiaFrame = requestAnimationFrame(this.moveByInertia)
       }
-    },
-    // 判断是否为向左滑动;
-    toLeft () {
-      return this.currentX - this.lastX < 0
     },
     // 检查是否需要回弹;
     checkReboundX () {
@@ -184,17 +177,17 @@ export default {
     // touch拖动
     moveFellowTouch () {
       this.startX = this.lastX
-      if (this.toLeft()) { // 向左拖动
+      if (this.isMoveLeft) { // 向左拖动
         if (this.translateX <= 0 && this.translateX + this.listWidth > 0) {
           this.translateX += this.currentX - this.lastX
         } else if (this.translateX + this.listWidth <= 0) {
-          this.translateX += this.opts.additionalX * (this.currentX - this.lastX) / (this.viewAreaWidth + Math.abs(this.translateX + this.listWidth))
+          this.translateX += this.additionalX * (this.currentX - this.lastX) / (this.viewAreaWidth + Math.abs(this.translateX + this.listWidth))
         } else if (this.translateX > 0) {
           this.translateX += this.currentX - this.lastX
         }
       } else { // 向右拖动
         if (this.translateX >= 0) {
-          this.translateX += this.opts.additionalX * (this.currentX - this.lastX) / (this.viewAreaWidth + this.translateX)
+          this.translateX += this.additionalX * (this.currentX - this.lastX) / (this.viewAreaWidth + this.translateX)
         } else if (this.translateX <= 0 && this.translateX + this.listWidth >= 0) {
           this.translateX += this.currentX - this.lastX
         } else if (this.translateX + this.listWidth <= 0) {
@@ -210,16 +203,16 @@ export default {
       if (this.isMoveLeft) { // 向左惯性滑动;
         if (this.translateX <= -this.listWidth) { // 超出边界的过程;
           // 加速度指数变化;
-          this.acceleration *= (this.opts.reBoundExponent +
+          this.acceleration *= (this.reBoundExponent +
                                Math.abs(this.translateX + this.listWidth)) /
-                               this.opts.reBoundExponent
+                               this.reBoundExponent
           this.speed = Math.min(this.speed - this.acceleration, 0) // 为避免减速过程过短，此处加速度没有乘上frameTime;
         } else {
           this.speed = Math.min(this.speed - this.acceleration * this.frameTime, 0)
         }
       } else if (this.isMoveRight) { // 向右惯性滑动;
         if (this.translateX >= 0) {
-          this.acceleration *= (this.opts.reBoundExponent + this.translateX) / this.opts.reBoundExponent
+          this.acceleration *= (this.reBoundExponent + this.translateX) / this.reBoundExponent
           this.speed = Math.max(this.speed - this.acceleration, 0)
         } else {
           this.speed = Math.max(this.speed - this.acceleration * this.frameTime, 0)
@@ -252,7 +245,6 @@ export default {
     right: 0;
     border-top: 1px solid #ccc;
     border-bottom: none;
-    width: 100%;
     .ly-tab-item {
       border-bottom: none!important;
     }
