@@ -6,7 +6,7 @@
  
  **demo效果**
  
- ![image](https://raw.githubusercontent.com/ScoutYin/Image-Resource/master/images/ly-tab.gif)
+ ![image](https://raw.githubusercontent.com/ScoutYin/Image-Resource/master/images/ly-tab/ly-tab1.0.3.gif)
 
 ## Installation
 ```shell

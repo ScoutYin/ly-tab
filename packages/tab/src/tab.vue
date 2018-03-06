@@ -116,26 +116,21 @@ export default {
   },
   mounted () {
     this.bindEvent()
-    this.$el.addEventListener('transitionend', () => {
-      this.reBounding = false
-    }, false)
   },
   methods: {
     // start
     handleTouchStart (event) {
       cancelAnimationFrame(this.inertiaFrame)
-      this.startX = this.lastX = event.touches[0].clientX
-      this.lastMoveStamp = event.timeStamp
+      this.lastX = event.touches[0].clientX
     },
     // move
     handleTouchMove (event) {
-      if (this.listWidth <= 0) {
-        return
-      }
+      if (this.listWidth <= 0) return
       event.preventDefault()
       event.stopPropagation()
       this.touching = true
       this.startMoveTime = this.endMoveTime
+      this.startX = this.lastX
       this.currentX = event.touches[0].clientX
       this.moveFellowTouch()
       this.endMoveTime = event.timeStamp // 每次触发touchmove事件的时间戳;
@@ -148,22 +143,20 @@ export default {
       } else {
         let silenceTime = event.timeStamp - this.endMoveTime
         let timeStamp = this.endMoveTime - this.startMoveTime
-        if (silenceTime > 300) { // 停顿时间超过100ms不产生惯性滑动;
-          return
-        }
+        if (silenceTime > 100) return  // 停顿时间超过100ms不产生惯性滑动;
         this.speed = (this.lastX - this.startX) / (timeStamp)
         this.acceleration = this.speed / this.sensitivity
         this.frameStartTime = new Date().getTime()
         this.inertiaFrame = requestAnimationFrame(this.moveByInertia)
       }
     },
-    // 检查是否需要回弹;
+    // 如果需要回弹则进行回弹操作并返回true;
     checkReboundX () {
       this.reBounding = false
-      if (this.translateX >= 0) {
+      if (this.translateX > 0) {
         this.reBounding = true
         this.translateX = 0
-      } else if (this.translateX <= -this.listWidth) {
+      } else if (this.translateX < -this.listWidth) {
         this.reBounding = true
         this.translateX = -this.listWidth
       }
@@ -176,21 +169,16 @@ export default {
     },
     // touch拖动
     moveFellowTouch () {
-      this.startX = this.lastX
       if (this.isMoveLeft) { // 向左拖动
-        if (this.translateX <= 0 && this.translateX + this.listWidth > 0) {
+        if (this.translateX <= 0 && this.translateX + this.listWidth > 0 || this.translateX > 0) {
           this.translateX += this.currentX - this.lastX
         } else if (this.translateX + this.listWidth <= 0) {
           this.translateX += this.additionalX * (this.currentX - this.lastX) / (this.viewAreaWidth + Math.abs(this.translateX + this.listWidth))
-        } else if (this.translateX > 0) {
-          this.translateX += this.currentX - this.lastX
         }
       } else { // 向右拖动
         if (this.translateX >= 0) {
           this.translateX += this.additionalX * (this.currentX - this.lastX) / (this.viewAreaWidth + this.translateX)
-        } else if (this.translateX <= 0 && this.translateX + this.listWidth >= 0) {
-          this.translateX += this.currentX - this.lastX
-        } else if (this.translateX + this.listWidth <= 0) {
+        } else if (this.translateX <= 0 && this.translateX + this.listWidth >= 0 || this.translateX + this.listWidth <= 0) {
           this.translateX += this.currentX - this.lastX
         }
       }
@@ -221,10 +209,10 @@ export default {
       this.translateX += this.speed * this.frameTime / 2
       if (Math.abs(this.speed) <= this.zeroSpeed) {
         this.checkReboundX()
-      } else {
-        this.frameStartTime = this.frameEndTime
-        this.inertiaFrame = requestAnimationFrame(this.moveByInertia)
+        return
       }
+      this.frameStartTime = this.frameEndTime
+      this.inertiaFrame = requestAnimationFrame(this.moveByInertia)
     }
   }
 }

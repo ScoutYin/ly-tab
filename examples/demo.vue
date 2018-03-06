@@ -4,7 +4,7 @@
     <ly-tab :value="selected" @input="changeSelected" activeColor="#1d98bd">
       <ly-tab-item v-for="(item, index) in tabList" :key="index">
         {{item.itemName}}
-        </ly-tab-item>
+      </ly-tab-item>
     </ly-tab>
     <h3>请选择移动端调试模式或者真机调试</h3>
     <!-- 通过绑定‘fixBottom’实现固定在底部的tab -->
@@ -12,20 +12,15 @@
       <ly-tab-item v-for="(item, index) in fixedList" :key="index">
         <span slot="icon">{{item.icon}}</span>
         {{item.itemName}}
-        </ly-tab-item>
+      </ly-tab-item>
     </ly-tab>
   </div>
 </template>
 
 <script>
-// import { LyTab, LyTabItem } from 'ly-tab'
 
 export default {
   name: 'Demo',
-  components: {
-    // LyTab,
-    // LyTabItem
-  },
   data () {
     return {
       selected: 0, // 自定义的变量用于存放当前选中的tab的索引值

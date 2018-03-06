@@ -7,13 +7,20 @@
  
  **demo效果**
  
- ![image](https://raw.githubusercontent.com/ScoutYin/Image-Resource/master/images/ly-tab.gif)
+ ![image](https://raw.githubusercontent.com/ScoutYin/Image-Resource/master/images/ly-tab/ly-tab1.0.3.gif)
  
  clone该仓库到本地可查看演示demo
+ 
+ [掘金文章地址](https://juejin.im/post/5a9a48a55188255584536f75)
 
 ## Installation
 ```shell
 npm i ly-tab -S
+
+```
+or
+```shell
+yarn add ly-tab
 
 ```
 
@@ -57,15 +64,12 @@ Vue.use(LyTab);
 ```bash
 # install dependencies
 npm install
+# or
+yarn
 
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
 
