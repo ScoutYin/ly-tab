@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import LyTab from 'ly-tab'
+import LyTab from '../packages/tab'
 
 Vue.use(LyTab)
 
