@@ -27,9 +27,9 @@ export default {
     activeStyle () {
       return {
         color: this.$parent.activeColor,
-        borderColor: this.$parent.activeColor,
-        borderWidth: this.$parent.lineWidth,
-        borderBottomStyle: 'solid'
+        // borderColor: this.$parent.activeColor,
+        // borderWidth: this.$parent.lineWidth,
+        // borderBottomStyle: 'solid'
       }
     }
   },
