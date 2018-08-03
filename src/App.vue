@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Demo from './demo'
+import Demo from '../examples/demo'
 
 export default {
   name: 'App',
