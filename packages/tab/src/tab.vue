@@ -1,5 +1,7 @@
 <template>
-  <div class="ly-tab" :class="{'ly-tab-fix-bottom': fixBottom}" ref="viewArea">
+  <div class="ly-tab"
+    :class="{'ly-tab-fix-bottom': fixBottom}"
+    ref="viewArea">
     <div class="ly-tab-list"
          :style="style"
          ref="list">
@@ -14,20 +16,6 @@
 </template>
 
 <script>
-/**
- * ly-tab
- * @desc 依赖 tab-item
- * @param {Boolean} fixBottom - 固定底部
- * @param {*} value - 返回 item component 传入的 id
- *
- * @example
- * <ly-tab v-model="selected"> // v-model只是一个双向绑定的语法糖
-      <ly-tab-item v-for="(item, index) in tabList" :key="index">
-        {{item.itemName}}
-      </ly-tab-item>
-    </ly-tab>
- */
-
 import './utils/requestAnimationFrame'
 
 export default {
@@ -92,6 +80,7 @@ export default {
 
   computed: {
     style () {
+      if (this.fixBottom) return {}
       return {
         transitionTimingFunction: this.transitionTimingFunction,
         transitionDuration: `${this.transitionDuration}ms`,
