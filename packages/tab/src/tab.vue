@@ -69,6 +69,8 @@ export default {
       startX: 0,
       lastX: 0,
       currentX: 0,
+      startMoveTime: 0,
+      endMoveTime: 0,
       frameTime: 16.7, // 每个动画帧的ms数
       frameStartTime: 0,
       frameEndTime: 0,
@@ -126,6 +128,7 @@ export default {
   watch: {
     value () {
       this.calcBarPosX()
+      this.checkPosition()
     }
   },
 
@@ -140,6 +143,7 @@ export default {
       cancelAnimationFrame(this.inertiaFrame)
       this.lastX = event.touches[0].clientX
     },
+
     // move
     handleTouchMove (event) {
       if (this.listWidth <= 0) return
@@ -152,6 +156,7 @@ export default {
       this.moveFellowTouch()
       this.endMoveTime = event.timeStamp // 每次触发touchmove事件的时间戳;
     },
+
     // end
     handleTouchEnd (event) {
       this.touching = false
@@ -167,6 +172,7 @@ export default {
         this.inertiaFrame = requestAnimationFrame(this.moveByInertia)
       }
     },
+
     // 如果需要回弹则进行回弹操作并返回true;
     checkReboundX () {
       this.reBounding = false
@@ -179,11 +185,13 @@ export default {
       }
       return this.translateX === 0 || this.translateX === -this.listWidth
     },
+
     bindEvent () {
       this.$el.addEventListener('touchstart', this.handleTouchStart, false)
       this.$el.addEventListener('touchmove', this.handleTouchMove, false)
       this.$el.addEventListener('touchend', this.handleTouchEnd, false)
     },
+
     // touch拖动
     moveFellowTouch () {
       if (this.isMoveLeft) { // 向左拖动
@@ -204,6 +212,7 @@ export default {
       }
       this.lastX = this.currentX
     },
+
     // 惯性滑动
     moveByInertia () {
       this.frameEndTime = new Date().getTime()
@@ -234,15 +243,37 @@ export default {
       this.frameStartTime = this.frameEndTime
       this.inertiaFrame = requestAnimationFrame(this.moveByInertia)
     },
+
     // 计算activeBar的translateX
     calcBarPosX () {
-      if (this.fixBottom) return
-      if (!this.$children.length) return
+      if (this.fixBottom || !this.$children.length) return
       const item = this.$children[this.value].$el
       const itemWidth = item.offsetWidth
       const itemLeft = item.offsetLeft
       this.activeBarWidth = Math.max(itemWidth * 0.6, 14)
       this.activeBarX = itemLeft + (itemWidth - this.activeBarWidth) / 2
+    },
+
+    // 点击切换item时，调整位置使当前item尽可能往中间显示
+    checkPosition () {
+      if (this.fixBottom || !this.$children.length) return
+      const activeItem = this.$children[this.value].$el
+      const offsetLeft = activeItem.offsetLeft
+      const half = (this.viewAreaWidth - activeItem.offsetWidth) / 2
+      let changeX = 0
+      const absTransX = Math.abs(this.translateX)
+      if (offsetLeft <= absTransX + half) { // item偏左，需要往右移
+        let pageX = offsetLeft + this.translateX
+        changeX = half - pageX
+      } else { // item偏右，需要往左移
+        changeX = -(offsetLeft - absTransX - half)
+      }
+      let lastX = changeX + this.translateX
+      // 两种边界情况
+      lastX > 0 && (lastX = 0)
+      lastX < -this.listWidth && (lastX = -this.listWidth)
+      this.reBounding = true
+      this.translateX = lastX
     }
   }
 }
