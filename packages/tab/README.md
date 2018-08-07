@@ -31,6 +31,7 @@ import Vue from 'vue'
 import LyTab from 'ly-tab'
 
 Vue.use(LyTab)
+// 之后便可在全局使用了
 ```
 
 ## Example
@@ -38,11 +39,11 @@ Vue.use(LyTab)
 > ly-tab 2.x版本（**推荐**）使用方法：
 
 ```html
-<LyTab
+<ly-tab
     v-model="selectedId"
     :items="items"
     :options="options">
-</LyTab>
+</ly-tab>
 ```
 
 ```javascript
