@@ -31,16 +31,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .ly-tab-item {
   text-decoration: none;
   text-align: center;
-  .ly-tab-item-icon {
-    margin: 0 auto 5px;
-  }
-  .ly-tab-item-label {
-    margin: 0 auto 10px;
-    line-height: 18px;
-  }
+}
+
+.ly-tab-item-icon {
+  margin: 0 auto 5px;
+}
+
+.ly-tab-item-label {
+  margin: 0 auto 10px;
+  line-height: 18px;
 }
 </style>

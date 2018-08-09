@@ -279,52 +279,56 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .ly-tab {
   position: relative;
-  background-color: rgba($color: #fff, $alpha: 0.8);
+  background-color: rgba(255 ,255, 255, .8);
   width: 100%;
   overflow: hidden;
   display: flex;
   border-bottom: 1px solid #ddd;
-  &.ly-tab-fix-bottom {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-top: 1px solid #ccc;
-    border-bottom: none;
-    .ly-tab-item {
-      border-bottom: none!important;
-    }
-  }
-  .ly-tab-list {
-    position: relative;
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: row nowrap;
-    flex-shrink: 0;
-    padding: 5px 10px 0;
-    min-width: 100%;
+}
 
-    .ly-tab-active-bar {
-      position: absolute;
-      bottom: 3px;
-      left: 0;
-      width: 30px;
-      height: 3px;
-      border-radius: 4px;
-    }
+.ly-tab.ly-tab-fix-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #ccc;
+  border-bottom: none;
+}
 
-    .ly-tab-item {
-      flex-grow: 1;
-      font-size: 14px;
-      text-align: center;
-      padding: 0 5px;
-      &:not(:first-child) {
-        margin-left: 15px;
-      }
-    }
-  }
+.ly-tab.ly-tab-fix-bottom .ly-tab-item {
+  border-bottom: none!important;
+}
+
+.ly-tab-list {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  flex-shrink: 0;
+  padding: 5px 10px 0;
+  min-width: 100%;
+}
+
+.ly-tab-active-bar {
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 30px;
+  height: 3px;
+  border-radius: 4px;
+}
+
+.ly-tab-item {
+  flex-grow: 1;
+  font-size: 14px;
+  text-align: center;
+  padding: 0 5px;
+}
+
+.ly-tab-item:not(:first-child) {
+  margin-left: 15px;
 }
 </style>
