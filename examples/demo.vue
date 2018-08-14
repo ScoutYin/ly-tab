@@ -3,7 +3,8 @@
   <LyTab
     v-model="selectedId"
     :items="items"
-    :options="options">
+    :options="options"
+    @change="handleChange">
   </LyTab>
   <h3>请选择移动端调试模式或者真机调试</h3>
   <!-- 通过指定fixBottom为true实现固定在底部的tab -->
@@ -48,6 +49,11 @@ export default {
         activeColor: '#1d98bd',
         fixBottom: true
       }
+    }
+  },
+  methods: {
+    handleChange (item, index) {
+      console.log(item, index)
     }
   }
 }

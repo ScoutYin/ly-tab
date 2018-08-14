@@ -1,7 +1,8 @@
 <template>
   <Tab
     v-model="selectedId"
-    v-bind="options">
+    v-bind="options"
+    @input="handleItemChanged">
     <TabItem
       v-for="(item, index) in items"
       :key="index"
@@ -47,6 +48,11 @@ export default {
   data () {
     return {
       selectedId: this.value
+    }
+  },
+  methods: {
+    handleItemChanged (index) {
+      this.$emit('change', this.items[index], index)
     }
   }
 }
