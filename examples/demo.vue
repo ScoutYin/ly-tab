@@ -3,7 +3,8 @@
   <LyTab
     v-model="selectedId"
     :items="items"
-    :options="options">
+    :options="options"
+    @change="handleChange">
   </LyTab>
   <h3>请选择移动端调试模式或者真机调试</h3>
   <!-- 通过指定fixBottom为true实现固定在底部的tab -->
@@ -39,15 +40,21 @@ export default {
         activeColor: '#1d98bd'
       },
       bottomItems: [
-        {label: '首页', icon: 'ly-icon ly-icon-home'},
-        {label: '沸点', icon: 'ly-icon ly-icon-icon--'},
-        {label: '发现', icon: 'ly-icon ly-icon-sousuo'},
-        {label: '我', icon: 'ly-icon ly-icon-wode'}
+        {text: '首页', icon: 'ly-icon ly-icon-home'},
+        {text: '沸点', icon: 'ly-icon ly-icon-icon--'},
+        {text: '发现', icon: 'ly-icon ly-icon-sousuo'},
+        {text: '我', icon: 'ly-icon ly-icon-wode'}
       ],
       bottomOptions: {
         activeColor: '#1d98bd',
-        fixBottom: true
+        fixBottom: true,
+        labelKey: 'text'
       }
+    }
+  },
+  methods: {
+    handleChange (item, index) {
+      console.log(item, index)
     }
   }
 }

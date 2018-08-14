@@ -33,6 +33,10 @@ export default {
 
 <style>
 .ly-tab-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-decoration: none;
   text-align: center;
 }
@@ -41,8 +45,4 @@ export default {
   margin: 0 auto 5px;
 }
 
-.ly-tab-item-label {
-  margin: 0 auto 10px;
-  line-height: 18px;
-}
 </style>
