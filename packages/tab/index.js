@@ -1,6 +1,5 @@
 import LyTab from './src/index.vue'
 
-const version = '2.0.1'
 const install = function (Vue, config = {}) {
   if (install.installed) return
 
@@ -14,6 +13,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 export default {
   install,
-  version,
   LyTab
 }
