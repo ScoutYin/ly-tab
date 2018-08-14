@@ -308,7 +308,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   flex-shrink: 0;
-  padding: 5px 10px 0;
+  padding: 10px;
   min-width: 100%;
 }
 
