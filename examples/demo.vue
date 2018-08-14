@@ -40,14 +40,15 @@ export default {
         activeColor: '#1d98bd'
       },
       bottomItems: [
-        {label: '首页', icon: 'ly-icon ly-icon-home'},
-        {label: '沸点', icon: 'ly-icon ly-icon-icon--'},
-        {label: '发现', icon: 'ly-icon ly-icon-sousuo'},
-        {label: '我', icon: 'ly-icon ly-icon-wode'}
+        {text: '首页', icon: 'ly-icon ly-icon-home'},
+        {text: '沸点', icon: 'ly-icon ly-icon-icon--'},
+        {text: '发现', icon: 'ly-icon ly-icon-sousuo'},
+        {text: '我', icon: 'ly-icon ly-icon-wode'}
       ],
       bottomOptions: {
         activeColor: '#1d98bd',
-        fixBottom: true
+        fixBottom: true,
+        labelKey: 'text'
       }
     }
   },

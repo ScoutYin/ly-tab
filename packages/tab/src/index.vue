@@ -12,7 +12,7 @@
         slot="icon">
         <i :class="item.icon"></i>
       </span>
-      <span>{{ item.label }}</span>
+      <span>{{ item[labelKey] }}</span>
     </TabItem>
   </Tab>
 </template>
@@ -48,6 +48,11 @@ export default {
   data () {
     return {
       selectedId: this.value
+    }
+  },
+  computed: {
+    labelKey () {
+      return this.options.labelKey || 'label'
     }
   },
   methods: {
