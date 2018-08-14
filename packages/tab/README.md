@@ -36,7 +36,7 @@ Vue.use(LyTab)
 
 ## Example
 
-> ly-tab 2.x版本（**推荐**）使用方法：
+> ly-tab 2.x版本（**推荐安装最新版本**）使用方法：
 
 ```html
 <ly-tab
@@ -64,6 +64,7 @@ export default {
       ],
       options: {
         activeColor: '#1d98bd'
+        // 可在这里指定labelKey为你数据里文字对应的字段
       },
     }
   }
@@ -119,6 +120,7 @@ export default {
 
  配置项 | 类型 | 描述 | 默认值 
 --------|---------|-------|-----
+ labelKey | String | 指定item的文字部分在item对象中的key | label 
  lineWidth | Number | fixBottom为false时tabbar底部border-width | 1px 
  activeColor | String | 激活状态下字体以及滑条颜色 | red 
  fixBottom | Boolean | 是否固定在视图底部 | false 
@@ -127,6 +129,12 @@ export default {
  sensitivity | Number | 惯性滑动时的灵敏度(值越小，阻力越大),可近似认为手松开后速度减为零所需时间 | 1000ms 
  reBoundingDuration | Number | 回弹动画duration | 360ms 
 
+
+## 事件
+
+ 事件名 | 参数 | 描述 
+ --------|---------|---------
+ change | item, index | 当前点击的item以及索引值
 
 ## Build Setup
 
