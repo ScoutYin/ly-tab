@@ -113,6 +113,7 @@ export default {
 - 配置项传入方式采用Object方式传入，即options的绑定值为一个Object
 - 新增滑条动画效果
 - 增加item切换时（非fixBottom）位置调整（动画），使当前激活的item尽量显示在中间
+- 不再依赖scss及相关依赖
 
 ## 可选的配置项：
 
@@ -121,7 +122,7 @@ export default {
  配置项 | 类型 | 描述 | 默认值 
 --------|---------|-------|-----
  labelKey | String | 指定item的文字部分在item对象中的key | label 
- lineWidth | Number | fixBottom为false时tabbar底部border-width | 1px 
+ lineWidth | Number | fixBottom为false时tabbar底部滑条高度 | 1px 
  activeColor | String | 激活状态下字体以及滑条颜色 | red 
  fixBottom | Boolean | 是否固定在视图底部 | false 
  additionalX | Number | 近似等于超出边界时最大可拖动距离 | 50px 
