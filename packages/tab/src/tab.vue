@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import './utils/requestAnimationFrame'
+import { windowInit } from './utils/requestAnimationFrame'
 
 export default {
   name: 'LyTab',
@@ -135,6 +135,7 @@ export default {
   mounted () {
     this.bindEvent()
     this.calcBarPosX()
+    windowInit()
   },
 
   methods: {
