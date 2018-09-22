@@ -34,7 +34,10 @@ export default {
       type: Boolean,
       default: false
     },
-    value: {},
+    value: {
+      type: Number,
+      default: 0
+    },
 
     // 近似等于超出边界时最大可拖动距离(px);
     additionalX: {
@@ -44,12 +47,18 @@ export default {
     // 惯性回弹指数(值越大，幅度越大，惯性回弹距离越长);
     reBoundExponent: {
       type: Number,
-      default: 10
+      default: 10,
+      validator (value) {
+        return value > 0
+      }
     },
     // 灵敏度(惯性滑动时的灵敏度,值越小，阻力越大),可近似认为速度减为零所需的时间(ms);
     sensitivity: {
       type: Number,
-      default: 1000
+      default: 1000,
+      validator (value) {
+        return value > 0
+      }
     },
     // 回弹过程duration;
     reBoundingDuration: {
@@ -127,20 +136,26 @@ export default {
 
   watch: {
     value () {
-      this.calcBarPosX()
       this.checkPosition()
+      this.calcBarPosX()
     }
   },
 
   mounted () {
     this.bindEvent()
+    this.checkPosition()
     this.calcBarPosX()
     windowInit()
+  },
+
+  destoryed () {
+    this.removeEvent()
   },
 
   methods: {
     // start
     handleTouchStart (event) {
+      event.stopPropagation()
       cancelAnimationFrame(this.inertiaFrame)
       this.lastX = event.touches[0].clientX
     },
@@ -154,7 +169,7 @@ export default {
       this.startMoveTime = this.endMoveTime
       this.startX = this.lastX
       this.currentX = event.touches[0].clientX
-      this.moveFellowTouch()
+      this.moveFollowTouch()
       this.endMoveTime = event.timeStamp // 每次触发touchmove事件的时间戳;
     },
 
@@ -166,8 +181,9 @@ export default {
       } else {
         let silenceTime = event.timeStamp - this.endMoveTime
         let timeStamp = this.endMoveTime - this.startMoveTime
+        timeStamp = timeStamp > 0 ? timeStamp : 8
         if (silenceTime > 100) return  // 停顿时间超过100ms不产生惯性滑动;
-        this.speed = (this.lastX - this.startX) / (timeStamp)
+        this.speed = (this.lastX - this.startX) / timeStamp
         this.acceleration = this.speed / this.sensitivity
         this.frameStartTime = new Date().getTime()
         this.inertiaFrame = requestAnimationFrame(this.moveByInertia)
@@ -193,8 +209,14 @@ export default {
       this.$el.addEventListener('touchend', this.handleTouchEnd, false)
     },
 
+    removeEvent () {
+      this.$el.removeEventListener('touchstart', this.handleTouchStart)
+      this.$el.removeEventListener('touchmove', this.handleTouchMove)
+      this.$el.removeEventListener('touchend', this.handleTouchEnd)
+    },
+
     // touch拖动
-    moveFellowTouch () {
+    moveFollowTouch () {
       if (this.isMoveLeft) { // 向左拖动
         if (this.translateX <= 0 && this.translateX + this.listWidth > 0 || this.translateX > 0) {
           this.translateX += this.currentX - this.lastX
@@ -248,6 +270,7 @@ export default {
     // 计算activeBar的translateX
     calcBarPosX () {
       if (this.fixBottom || !this.$children.length) return
+      if (this.$children.length <= this.value) return
       const item = this.$children[this.value].$el
       const itemWidth = item.offsetWidth
       const itemLeft = item.offsetLeft
@@ -258,6 +281,7 @@ export default {
     // 点击切换item时，调整位置使当前item尽可能往中间显示
     checkPosition () {
       if (this.fixBottom || !this.$children.length) return
+      if (this.$children.length <= this.value) return
       const activeItem = this.$children[this.value].$el
       const offsetLeft = activeItem.offsetLeft
       const half = (this.viewAreaWidth - activeItem.offsetWidth) / 2
