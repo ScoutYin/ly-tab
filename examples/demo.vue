@@ -23,7 +23,7 @@ export default {
   name: 'Demo',
   data () {
     return {
-      selectedId: 0,
+      selectedId: 8,
       bottomSelectedId: 0,
       items: [
         {label: '首页'},
