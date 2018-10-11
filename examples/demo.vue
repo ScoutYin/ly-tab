@@ -1,19 +1,19 @@
 <template>
 <div class="demo">
-  <LyTab
+  <ly-tab
     v-model="selectedId"
     :items="items"
     :options="options"
     @change="handleChange">
-  </LyTab>
+  </ly-tab>
   <h3>请选择移动端调试模式或者真机调试</h3>
   <!-- 通过指定fixBottom为true实现固定在底部的tab -->
-  <LyTab
+  <ly-tab
     v-model="bottomSelectedId"
     :items="bottomItems"
     :options="bottomOptions"
     >
-  </LyTab>
+  </ly-tab>
 </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
   name: 'Demo',
   data () {
     return {
-      selectedId: 8,
+      selectedId: 4,
       bottomSelectedId: 0,
       items: [
         {label: '首页'},
@@ -52,6 +52,7 @@ export default {
       }
     }
   },
+
   methods: {
     handleChange (item, index) {
       console.log(item, index)

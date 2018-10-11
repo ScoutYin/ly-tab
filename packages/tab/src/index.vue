@@ -1,9 +1,10 @@
 <template>
-  <Tab
+<div class="ly-tab">
+  <ly-tabbar
     v-model="selectedId"
     v-bind="options"
     @input="handleItemChanged">
-    <TabItem
+    <ly-tab-item
       v-for="(item, index) in items"
       :key="index"
       >
@@ -13,19 +14,20 @@
         <i :class="item.icon"></i>
       </span>
       <span>{{ item[labelKey] }}</span>
-    </TabItem>
-  </Tab>
+    </ly-tab-item>
+  </ly-tabbar>
+</div>
 </template>
 
 <script>
-import Tab from './tab'
-import TabItem from './tab-item'
+import LyTabbar from './tabbar'
+import LyTabItem from './tab-item'
 
 export default {
   name: 'LyTab',
   components: {
-    Tab,
-    TabItem
+    LyTabbar,
+    LyTabItem
   },
   props: {
     value: {
@@ -53,6 +55,11 @@ export default {
   computed: {
     labelKey () {
       return this.options.labelKey || 'label'
+    }
+  },
+  watch: {
+    value (value) {
+      this.selectedId = value
     }
   },
   methods: {

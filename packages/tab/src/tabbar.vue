@@ -1,6 +1,6 @@
 <template>
-  <div class="ly-tab"
-    :class="{'ly-tab-fix-bottom': fixBottom}"
+  <div class="ly-tabbar"
+    :class="{'ly-tabbar-fix-bottom': fixBottom}"
     ref="viewArea">
     <div class="ly-tab-list"
          :style="style"
@@ -19,7 +19,7 @@
 import { windowInit } from './utils/requestAnimationFrame'
 
 export default {
-  name: 'LyTab',
+  name: 'LyTabbar',
 
   props: {
     lineWidth: {
@@ -305,7 +305,7 @@ export default {
 </script>
 
 <style>
-.ly-tab {
+.ly-tabbar {
   position: relative;
   background-color: rgba(255 ,255, 255, .8);
   width: 100%;
@@ -314,7 +314,7 @@ export default {
   border-bottom: 1px solid #ddd;
 }
 
-.ly-tab.ly-tab-fix-bottom {
+.ly-tabbar.ly-tabbar-fix-bottom {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -323,7 +323,7 @@ export default {
   border-bottom: none;
 }
 
-.ly-tab.ly-tab-fix-bottom .ly-tab-item {
+.ly-tabbar.ly-tabbar-fix-bottom .ly-tab-item {
   border-bottom: none!important;
 }
 
