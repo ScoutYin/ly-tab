@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 @import "./assets/icon/iconfont.css";
 
 #app {
