@@ -1,6 +1,6 @@
 {
   "name": "ly-tab",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A better mobile touch-swappable reusable component for vue2.*",
   "author": "ScoutYin <yinbin_web@163.com>",
   "contributors": [
