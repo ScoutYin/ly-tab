@@ -3,7 +3,7 @@
   <ly-tabbar
     v-model="selectedId"
     v-bind="options"
-    @input="handleItemChanged">
+  >
     <ly-tab-item
       v-for="(item, index) in items"
       :key="index"
@@ -60,11 +60,10 @@ export default {
   watch: {
     value (value) {
       this.selectedId = value
-    }
-  },
-  methods: {
-    handleItemChanged (index) {
-      this.$emit('change', this.items[index], index)
+    },
+    selectedId (value) {
+      this.$emit('input', value)
+      this.$emit('change', this.items[value], value)
     }
   }
 }

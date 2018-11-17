@@ -24,7 +24,7 @@ export default {
   props: {
     lineWidth: {
       type: Number,
-      default: 1
+      default: 3
     },
     activeColor: {
       type: String,
@@ -102,6 +102,7 @@ export default {
       return {
         transition: `all 300ms`,
         width: `${this.activeBarWidth}px`,
+        height: `${this.lineWidth}px`,
         transform: `translate3d(${this.activeBarX}px, 0, 0)`,
         backgroundColor: this.activeColor
       }
@@ -311,7 +312,8 @@ export default {
   width: 100%;
   overflow: hidden;
   display: flex;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 0px 6px 1px #eee
 }
 
 .ly-tabbar.ly-tabbar-fix-bottom {
@@ -333,7 +335,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   flex-shrink: 0;
-  padding: 10px;
+  padding: 14px 10px;
   min-width: 100%;
 }
 
