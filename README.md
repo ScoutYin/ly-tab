@@ -1,6 +1,10 @@
 
 # Ly-tab
 
+![](https://img.shields.io/npm/v/ly-tab.svg)
+![](https://img.shields.io/npm/dm/ly-tab.svg)
+
+
 > A better mobile touch-swappable reusable component for **Vue 2.0**
 
  一个用于移动端的可触摸滑动具有回弹效果的可复用Vue组件
