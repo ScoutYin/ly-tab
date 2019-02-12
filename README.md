@@ -119,6 +119,10 @@ export default {
 - 增加item切换时（非fixBottom）位置调整（动画），使当前激活的item尽量显示在中间
 - 不再依赖scss及相关依赖
 
+## CHANGELOG
+
+[CHANGELOG](https://github.com/ScoutYin/ly-tab/blob/master/CHANGELOG_CN.md)
+
 ## 可选的配置项：
 
 从2.0版本开始，配置项采用Object方式传入，1.x版本采用单个配置传入方式
