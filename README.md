@@ -2,7 +2,7 @@
 # Ly-tab
 
 ![](https://img.shields.io/npm/v/ly-tab.svg)
-![](https://img.shields.io/npm/dm/ly-tab.svg)
+![](https://img.shields.io/npm/dt/ly-tab.svg)
 
 
 > A better mobile touch-swappable reusable component for **Vue 2.0**
