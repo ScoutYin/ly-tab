@@ -1,16 +1,22 @@
 <template>
   <a
-    class="ly-tab-item"
     :style="$parent.value === id ? activeStyle : {}"
-    @click="onItemClicked">
+    class="ly-tab-item"
+    @click="onItemClicked"
+	>
     <div class="ly-tab-item-icon" v-if="$parent.fixBottom"><slot name="icon"></slot></div>
-    <div class="ly-tab-item-label"><slot></slot></div>
+    <div class="ly-tab-item-label">
+			<slot>{{ title }}</slot>
+		</div>
   </a>
 </template>
 
 <script>
 export default {
   name: 'LyTabItem',
+	props: {
+		title: String
+	},
   computed: {
     activeStyle () {
       return {

@@ -1,29 +1,39 @@
-// https://eslint.org/docs/user-guide/configuring
-
 module.exports = {
-  root: true,
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
-  env: {
-    browser: true,
-  },
-  extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential', 
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard'
-  ],
-  // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
-  // add your custom rules here
-  rules: {
-    // allow async-await
-    'generator-star-spacing': 'off',
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
-}
+	root: true,
+	env: {
+		browser: true,
+		node: true,
+		es2021: true
+	},
+	parser: '@typescript-eslint/parser',
+	plugins: ['@typescript-eslint'],
+	extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:prettier/recommended'
+	],
+	// 规则覆盖
+	rules: {
+		'prettier/prettier': [
+			'warn',
+			{
+				singleQuote: true, // 使用单引号
+				useTabs: true, // 使用tab代替空格缩进
+				// tabWidth: 2,
+				trailingComma: 'none' // 尾部的逗号
+			},
+			{
+				usePrettierrc: false // 不使用.prettierrc配置文件
+			}
+		],
+		'@typescript-eslint/no-unused-vars': ['error']
+	},
+	overrides: [
+		{
+			files: ['build/*.js'],
+			rules: {
+				'@typescript-eslint/no-var-requires': 0
+			}
+		}
+	]
+};

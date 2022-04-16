@@ -1,15 +1,21 @@
 <template>
-  <div class="ly-tabbar"
-    :class="{'ly-tabbar-fix-bottom': fixBottom}"
-    ref="viewArea">
-    <div class="ly-tab-list"
-         :style="style"
-         ref="list">
-      <slot></slot>
-      <div class="ly-tab-active-bar"
-          v-if="!fixBottom"
-          :style="activeBarStyle"
-          ref="activeBar">
+  <div
+    ref="viewArea"
+    :class="{ 'ly-tabbar-fix-bottom': fixBottom }"
+		class="ly-tabbar"
+	>
+    <div
+			ref="list"
+			:style="style"
+			class="ly-tab-list"
+		>
+      <slot />
+      <div
+				v-if="!fixBottom"
+				ref="activeBar"
+				:style="activeBarStyle"
+				class="ly-tab-active-bar"
+			>
       </div>
     </div>
   </div>
@@ -52,7 +58,7 @@ export default {
         return value > 0
       }
     },
-    // 灵敏度(惯性滑动时的灵敏度,值越小，阻力越大),可近似认为速度减为零所需的时间(ms);
+    // 灵敏度(惯性滑动时的灵敏度，值越小，阻力越大)，可近似认为速度减为零所需的时间(ms);
     sensitivity: {
       type: Number,
       default: 1000,
@@ -60,7 +66,7 @@ export default {
         return value > 0
       }
     },
-    // 回弹过程duration;
+    // 回弹过程duration
     reBoundingDuration: {
       type: Number,
       default: 360
@@ -85,7 +91,7 @@ export default {
       frameEndTime: 0,
       inertiaFrame: 0,
       zeroSpeed: 0.001, // 当speed绝对值小于该值时认为速度为0 (可用于控制惯性滚动结束期的顺滑度)
-      acceleration: 0 // 惯性滑动加速度;
+      acceleration: 0, // 惯性滑动加速度;
     }
   },
 
@@ -149,7 +155,7 @@ export default {
     windowInit()
   },
 
-  destroyed () {
+  destoryed () {
     this.removeEvent()
   },
 
@@ -183,7 +189,7 @@ export default {
         let silenceTime = event.timeStamp - this.endMoveTime
         let timeStamp = this.endMoveTime - this.startMoveTime
         timeStamp = timeStamp > 0 ? timeStamp : 8
-        if (silenceTime > 100) return // 停顿时间超过100ms不产生惯性滑动;
+        if (silenceTime > 100) return  // 停顿时间超过100ms不产生惯性滑动;
         this.speed = (this.lastX - this.startX) / timeStamp
         this.acceleration = this.speed / this.sensitivity
         this.frameStartTime = new Date().getTime()
@@ -222,16 +228,16 @@ export default {
         if (this.translateX <= 0 && this.translateX + this.listWidth > 0 || this.translateX > 0) {
           this.translateX += this.currentX - this.lastX
         } else if (this.translateX + this.listWidth <= 0) {
-          this.translateX += this.additionalX * (this.currentX - this.lastX) /
-                             (this.viewAreaWidth + Math.abs(this.translateX + this.listWidth))
+          this.translateX += this.additionalX * (this.currentX - this.lastX)
+                             / (this.viewAreaWidth + Math.abs(this.translateX + this.listWidth))
         }
       } else { // 向右拖动
         if (this.translateX >= 0) {
-          this.translateX += this.additionalX * (this.currentX - this.lastX) /
-                             (this.viewAreaWidth + this.translateX)
+          this.translateX += this.additionalX * (this.currentX - this.lastX)
+                             / (this.viewAreaWidth + this.translateX)
         } else if ((this.translateX <= 0 && this.translateX + this.listWidth >= 0) ||
           this.translateX + this.listWidth <= 0) {
-          this.translateX += this.currentX - this.lastX
+            this.translateX += this.currentX - this.lastX
         }
       }
       this.lastX = this.currentX

@@ -1,6 +1,6 @@
 <template>
-<div class="demo">
-  <ly-tab
+  <div id="app">
+    <ly-tab
     v-model="selectedId"
     :items="items"
     :options="options"
@@ -14,16 +14,16 @@
     :options="bottomOptions"
     >
   </ly-tab>
-</div>
+  </div>
 </template>
 
 <script>
 
 export default {
-  name: 'Demo',
-  data () {
+  name: 'App',
+	 data () {
     return {
-      selectedId: 4,
+      selectedId: 2,
       bottomSelectedId: 0,
       items: [
         {label: '首页'},
@@ -62,5 +62,13 @@ export default {
 </script>
 
 <style>
+@import "./assets/icon/iconfont.css";
 
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 </style>

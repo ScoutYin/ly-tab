@@ -7,10 +7,11 @@
     <ly-tab-item
       v-for="(item, index) in items"
       :key="index"
-      >
+    >
       <span
         v-if="options.fixBottom && item.icon"
-        slot="icon">
+        slot="icon"
+			>
         <i :class="item.icon"></i>
       </span>
       <span>{{ item[labelKey] }}</span>
@@ -31,8 +32,8 @@ export default {
   },
   props: {
     value: {
-      type: Number,
-      default: 0
+      type: [String, Number],
+      default: ''
     },
     items: {
       type: Array,
