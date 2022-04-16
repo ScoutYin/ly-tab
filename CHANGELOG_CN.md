@@ -1,3 +1,9 @@
+### 2.1.3 (2022-04-16)
+
+Fixed:
+
+- core 修复`ly-tabbar`组件销毁生命周期钩子名拼写错误（`destoryed` -> `destroyed`)
+
 ### 2.1.2 (2018-11-17)
 
 Fixed:
