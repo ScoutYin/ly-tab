@@ -85,7 +85,7 @@ export default {
       frameEndTime: 0,
       inertiaFrame: 0,
       zeroSpeed: 0.001, // 当speed绝对值小于该值时认为速度为0 (可用于控制惯性滚动结束期的顺滑度)
-      acceleration: 0, // 惯性滑动加速度;
+      acceleration: 0 // 惯性滑动加速度;
     }
   },
 
@@ -149,7 +149,7 @@ export default {
     windowInit()
   },
 
-  destoryed () {
+  destroyed () {
     this.removeEvent()
   },
 
@@ -183,7 +183,7 @@ export default {
         let silenceTime = event.timeStamp - this.endMoveTime
         let timeStamp = this.endMoveTime - this.startMoveTime
         timeStamp = timeStamp > 0 ? timeStamp : 8
-        if (silenceTime > 100) return  // 停顿时间超过100ms不产生惯性滑动;
+        if (silenceTime > 100) return // 停顿时间超过100ms不产生惯性滑动;
         this.speed = (this.lastX - this.startX) / timeStamp
         this.acceleration = this.speed / this.sensitivity
         this.frameStartTime = new Date().getTime()
@@ -222,16 +222,16 @@ export default {
         if (this.translateX <= 0 && this.translateX + this.listWidth > 0 || this.translateX > 0) {
           this.translateX += this.currentX - this.lastX
         } else if (this.translateX + this.listWidth <= 0) {
-          this.translateX += this.additionalX * (this.currentX - this.lastX)
-                             / (this.viewAreaWidth + Math.abs(this.translateX + this.listWidth))
+          this.translateX += this.additionalX * (this.currentX - this.lastX) /
+                             (this.viewAreaWidth + Math.abs(this.translateX + this.listWidth))
         }
       } else { // 向右拖动
         if (this.translateX >= 0) {
-          this.translateX += this.additionalX * (this.currentX - this.lastX)
-                             / (this.viewAreaWidth + this.translateX)
+          this.translateX += this.additionalX * (this.currentX - this.lastX) /
+                             (this.viewAreaWidth + this.translateX)
         } else if ((this.translateX <= 0 && this.translateX + this.listWidth >= 0) ||
           this.translateX + this.listWidth <= 0) {
-            this.translateX += this.currentX - this.lastX
+          this.translateX += this.currentX - this.lastX
         }
       }
       this.lastX = this.currentX
