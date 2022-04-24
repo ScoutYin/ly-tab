@@ -1,54 +1,47 @@
 <template>
-  <a
-    :style="$parent.value === id ? activeStyle : {}"
-    class="ly-tab-item"
-    @click="onItemClicked"
+	<div
+		:style="$parent.value === name ? activeStyle : {}"
+		class="ly-tab-item"
+		@click="onItemClicked"
 	>
-    <div class="ly-tab-item-icon" v-if="$parent.fixBottom"><slot name="icon"></slot></div>
-    <div class="ly-tab-item-label">
+		<slot name="icon" />
+		<div class="ly-tab-item-label">
 			<slot>{{ title }}</slot>
 		</div>
-  </a>
+	</div>
 </template>
 
 <script>
 export default {
-  name: 'LyTabItem',
+	name: 'LyTabItem',
 	props: {
-		title: String
+		title: String,
+		name: [String, Number]
 	},
-  computed: {
-    activeStyle () {
-      return {
-        color: this.$parent.activeColor
-      }
-    }
-  },
-  data () {
-    return {
-      id: (this.$parent.$children.length || 1) - 1
-    }
-  },
-  methods: {
-    onItemClicked () {
-      this.$parent.$emit('input', this.id)
-    }
-  }
-}
+	computed: {
+		activeStyle() {
+			return {
+				color: this.$parent.activeColor
+			};
+		}
+	},
+	mounted() {
+		this.$parent.addItem && this.$parent.addItem(this);
+	},
+	methods: {
+		onItemClicked() {
+			this.$parent.setActiveValue(this.name);
+		}
+	}
+};
 </script>
 
 <style>
 .ly-tab-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  text-align: center;
+	flex: 1 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
-
-.ly-tab-item-icon {
-  margin: 0 auto 5px;
-}
-
 </style>

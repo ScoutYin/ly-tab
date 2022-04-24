@@ -1,17 +1,5 @@
-import LyTab from './ly-tab.vue';
+import LyTabBar from './tab-bar.vue';
+import LyTabItem from './tab-item.vue';
+import LyTabs from './tabs.vue';
 
-const install = function (Vue) {
-	if (install.installed) return;
-
-	Vue.component(LyTab.name, LyTab);
-};
-
-// auto install
-if (typeof window !== 'undefined' && window.Vue) {
-	install(window.Vue);
-}
-
-export default {
-	install,
-	LyTab
-};
+export { LyTabs, LyTabBar, LyTabItem };
