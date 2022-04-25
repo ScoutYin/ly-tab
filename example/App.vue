@@ -2,7 +2,7 @@
 	<div id="app">
 		<ly-tabs v-model="tabsValue" @change="handleTabsChange">
 			<ly-tab-item
-				v-for="item in items"
+				v-for="item in tabsItems"
 				:key="item.value"
 				:title="item.title"
 				:name="item.value"
@@ -14,7 +14,7 @@
 		<div class="demo-tab-bar">
 			<ly-tab-bar v-model="tabBarValue" @change="handleTabBarChange">
 				<ly-tab-item
-					v-for="item in bottomItems"
+					v-for="item in tabBarItems"
 					:key="item.value"
 					:title="item.title"
 					:name="item.value"
@@ -43,7 +43,7 @@ export default {
 		return {
 			tabsValue: 'fe',
 			tabBarValue: 'home',
-			items: [
+			tabsItems: [
 				{ title: '首页', value: 'home' },
 				{ title: '推荐', value: 'recommend' },
 				{ title: 'Android', value: 'android' },
@@ -54,30 +54,23 @@ export default {
 				// { title: '人工智能', value: 'ai' },
 				// { title: '设计', value: 'design' }
 			],
-			options: {
-				activeColor: '#1d98bd'
-			},
-			bottomItems: [
+			tabBarItems: [
 				{ title: '首页', icon: 'ly-icon ly-icon-home', value: 'home' },
 				{ title: '沸点', icon: 'ly-icon ly-icon-icon--', value: 'pins' },
 				{ title: '发现', icon: 'ly-icon ly-icon-sousuo', value: 'find' },
 				{ title: '我', icon: 'ly-icon ly-icon-wode', value: 'mine' }
-			],
-			bottomOptions: {
-				activeColor: '#1d98bd',
-				fixBottom: true,
-				labelKey: 'text'
-			}
+			]
 		};
 	},
 	mounted() {
+		// 模拟动态更新tabs
 		setTimeout(() => {
-			this.items.push(
+			this.tabsItems.push(
 				{ title: '产品', value: 'pm' },
 				{ title: '人工智能', value: 'ai' },
 				{ title: '设计', value: 'design' }
 			);
-		}, 2000);
+		}, 1000);
 	},
 	methods: {
 		handleTabsChange(value) {
