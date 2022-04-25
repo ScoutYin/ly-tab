@@ -1,17 +1,17 @@
 {
   "name": "ly-tab",
   "version": "3.0.0",
-  "main": "dist/ly-tab.js",
+  "main": "lib/ly-tab.common.js",
   "description": "A better mobile touch-swappable reusable component for vue2.*",
   "author": "ScoutYin <scoutyin.1900@gmail.com>",
   "files": [
     "src",
-    "dist"
+    "lib"
   ],
   "scripts": {
-    "dev": "webpack serve --config build/webpack.config.js",
+    "dev": "webpack serve --config build/webpack.config.js --mode development",
     "start": "npm run dev",
-    "build": "webpack --config build/webpack.config.js"
+    "build": "webpack --config build/webpack.config.js --mode production"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -29,7 +29,8 @@
     "vue-template-compiler": "^2.6.14",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.8.1"
+    "webpack-dev-server": "^4.8.1",
+    "webpack-merge": "^5.8.0"
   },
   "engines": {
     "node": ">= 6.0.0",

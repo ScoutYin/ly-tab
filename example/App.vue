@@ -27,7 +27,11 @@
 </template>
 
 <script>
+// dev import
 import { LyTabs, LyTabBar, LyTabItem } from '../src/index';
+// prod import
+// import { LyTabs, LyTabBar, LyTabItem } from '..';
+
 export default {
 	name: 'App',
 	components: {
