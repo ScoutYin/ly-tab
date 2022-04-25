@@ -28,7 +28,7 @@
 
 <script>
 // dev import
-import { LyTabs, LyTabBar, LyTabItem } from '../src/index';
+import { LyTabs, LyTabBar, LyTabItem } from 'ly-tab';
 // prod import
 // import { LyTabs, LyTabBar, LyTabItem } from '..';
 

@@ -59,7 +59,8 @@ const devConfig = {
 	resolve: {
 		extensions: ['.vue', '.js', '...'],
 		alias: {
-			vue$: 'vue/dist/vue.esm.js'
+			vue$: 'vue/dist/vue.esm.js',
+			'ly-tab': path.resolve(rootDir, 'src/index.js')
 		}
 	},
 
