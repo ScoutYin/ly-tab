@@ -119,12 +119,12 @@ export default {
 
 	mounted() {
 		windowInit();
-		this.bindEvent();
+		this.bindEvents();
 		this.refreshState();
 	},
 
 	destroyed() {
-		this.removeEvent();
+		this.removeEvents();
 	},
 
 	methods: {
@@ -208,13 +208,13 @@ export default {
 			return this.reBounding;
 		},
 
-		bindEvent() {
+		bindEvents() {
 			this.$el.addEventListener('touchstart', this.handleTouchStart, false);
 			this.$el.addEventListener('touchmove', this.handleTouchMove, false);
 			this.$el.addEventListener('touchend', this.handleTouchEnd, false);
 		},
 
-		removeEvent() {
+		removeEvents() {
 			this.$el.removeEventListener('touchstart', this.handleTouchStart);
 			this.$el.removeEventListener('touchmove', this.handleTouchMove);
 			this.$el.removeEventListener('touchend', this.handleTouchEnd);
@@ -252,7 +252,9 @@ export default {
 			this.lastX = this.currentX;
 		},
 
-		// 惯性滑动
+		/**
+		 * 惯性滑动
+		 */
 		moveByInertia() {
 			this.frameEndTime = Date.now();
 			this.frameTime = this.frameEndTime - this.frameStartTime;
@@ -265,7 +267,8 @@ export default {
 					this.acceleration *=
 						(this.reBoundExponent + Math.abs(this.translateX + this.offsetX)) /
 						this.reBoundExponent;
-					this.speed = Math.min(this.speed - this.acceleration, 0); // 为避免减速过程过短，此处加速度没有乘上frameTime;
+					// 为避免减速过程过短，此处加速度没有乘上frameTime;
+					this.speed = Math.min(this.speed - this.acceleration, 0);
 				} else {
 					this.speed = Math.min(
 						this.speed - this.acceleration * this.frameTime,
@@ -340,15 +343,27 @@ export default {
 			this.reBounding = true;
 			this.translateX = targetX;
 		},
+		/**
+		 * 获取当前激活 item 的 dom 元素 $el
+		 */
 		getActiveItemEl() {
 			if (!this.$children.length) return;
-			return this.$children.find((child) => child.name === this.activeValue)
-				.$el;
+			const target = this.$children.find(
+				(child) => child.name === this.activeValue
+			);
+			return target && target.$el;
 		},
+		/**
+		 * 设置激活值，供 LyTabItem 实例调用
+		 * @param {*} value
+		 */
 		setActiveValue(value) {
 			this.activeValue = value;
 			this.$emit('change', value);
 		},
+		/**
+		 * LyTabItem 实例调用，注册 item
+		 */
 		addItem() {
 			this.refreshState();
 		}
@@ -358,22 +373,19 @@ export default {
 
 <style>
 .ly-tabs {
-	position: relative;
-	background: #fff;
-	width: 100%;
 	overflow: hidden;
-	display: flex;
+	position: relative;
+	width: 100%;
 	border-bottom: 1px solid #eee;
+	background: #fff;
 }
 
 .ly-tabs__tab-list {
 	position: relative;
-	box-sizing: border-box;
 	display: flex;
-	flex-flow: row nowrap;
-	flex-shrink: 0;
-	padding: 14px 10px;
+	flex-wrap: nowrap;
 	min-width: 100%;
+	width: min-content;
 }
 
 .ly-tabs__active-bar {
@@ -386,13 +398,10 @@ export default {
 }
 
 .ly-tabs .ly-tab-item {
-	flex-grow: 1;
+	padding: 10px 12px;
+	flex: 1 1 auto;
 	font-size: 14px;
 	text-align: center;
-	padding: 0 5px;
-}
-
-.ly-tabs .ly-tab-item:not(:first-child) {
-	margin-left: 15px;
+	white-space: nowrap;
 }
 </style>

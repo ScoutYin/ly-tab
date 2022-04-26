@@ -51,6 +51,7 @@ export default {
 	background: #fff;
 }
 .ly-tab-bar .ly-tab-item {
+	flex: 1 1;
 	font-size: 12px;
 }
 </style>

@@ -38,7 +38,6 @@ export default {
 
 <style>
 .ly-tab-item {
-	flex: 1 1;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
