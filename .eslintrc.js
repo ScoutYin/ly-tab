@@ -24,6 +24,7 @@ module.exports = {
 				usePrettierrc: false // 不使用.prettierrc配置文件
 			}
 		],
+		'implicit-arrow-linebreak': ['warn', 'beside'],
 		'vue/require-default-prop': 0
 	}
 };
