@@ -2,7 +2,7 @@
 	<div ref="viewArea" class="ly-tabs">
 		<div ref="list" :style="style" class="ly-tabs__tab-list">
 			<slot />
-			<div :style="activeBarStyle" class="ly-tabs__active-bar" />
+			<div :style="activeBarStyle" class="ly-tabs__active-line" />
 		</div>
 	</div>
 </template>
@@ -22,6 +22,10 @@ export default {
 			default: ''
 		},
 		lineWidth: {
+			type: Number,
+			default: 30
+		},
+		lineHeight: {
 			type: Number,
 			default: 3
 		},
@@ -60,8 +64,8 @@ export default {
 	data() {
 		return {
 			activeValue: this.value,
-			activeBarX: 0,
-			activeBarWidth: 0,
+			lineOffset: 0,
+			activeLineWidth: 0,
 			viewAreaWidth: 0, // 可视区宽度;
 			offsetX: 0, // 可视区与可滑动元素宽度差值;
 			speed: 0, // 滑动速度(正常滑动时一般不会超过10);
@@ -98,9 +102,9 @@ export default {
 		activeBarStyle() {
 			return {
 				transition: `all 300ms`,
-				width: `${this.activeBarWidth}px`,
-				height: `${this.lineWidth}px`,
-				transform: `translate3d(${this.activeBarX}px, 0, 0)`,
+				width: `${this.activeLineWidth}px`,
+				height: `${this.lineHeight}px`,
+				transform: `translate3d(${this.lineOffset}px, 0, 0)`,
 				backgroundColor: this.activeColor
 			};
 		},
@@ -138,7 +142,7 @@ export default {
 					this.viewAreaWidth = this.$refs.viewArea.offsetWidth;
 					this.offsetX = this.$refs.list.offsetWidth - this.viewAreaWidth;
 					this.checkPosition();
-					this.calcBarPosX();
+					this.calcLineOffset();
 					resolve();
 					this.refreshTask = null;
 				});
@@ -300,14 +304,25 @@ export default {
 		/**
 		 * 计算activeBar的translateX
 		 */
-		calcBarPosX() {
+		calcLineOffset() {
 			const itemEl = this.getActiveItemEl();
 			if (!itemEl) return;
 
 			const itemWidth = itemEl.offsetWidth;
 			const itemLeft = itemEl.offsetLeft;
-			this.activeBarWidth = Math.max(itemWidth * 0.6, 14);
-			this.activeBarX = itemLeft + (itemWidth - this.activeBarWidth) / 2;
+			const { lineWidth } = this;
+
+			if (lineWidth === 'auto') {
+				// 等于当前激活item元素的宽度
+				this.activeLineWidth = itemWidth;
+			} else if (lineWidth < 1) {
+				// 0~1表示占当前激活item元素宽度的比例
+				this.activeLineWidth = itemWidth * lineWidth;
+			} else {
+				this.activeLineWidth = lineWidth;
+			}
+
+			this.lineOffset = itemLeft + (itemWidth - this.activeLineWidth) / 2;
 		},
 
 		/**
@@ -388,7 +403,7 @@ export default {
 	width: min-content;
 }
 
-.ly-tabs__active-bar {
+.ly-tabs__active-line {
 	position: absolute;
 	bottom: 3px;
 	left: 0;
