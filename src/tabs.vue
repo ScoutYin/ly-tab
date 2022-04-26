@@ -419,4 +419,7 @@ export default {
 	text-align: center;
 	white-space: nowrap;
 }
+/* .ly-tabs .ly-tab-item__badge {
+	top: 6px;
+} */
 </style>

@@ -6,6 +6,7 @@
 				:key="item.value"
 				:title="item.title"
 				:name="item.value"
+				:badge="item.badge"
 			/>
 		</ly-tabs>
 
@@ -18,6 +19,7 @@
 					:key="item.value"
 					:title="item.title"
 					:name="item.value"
+					:badge="item.badge"
 				>
 					<template #icon>
 						<i :class="item.icon" />
@@ -49,7 +51,7 @@ export default {
 				{ title: '首页', value: 'home' },
 				{ title: '推荐', value: 'recommend' },
 				{ title: 'Android', value: 'android' },
-				{ title: '前端', value: 'fe' },
+				{ title: '前端', value: 'fe', badge: 22 },
 				{ title: '后端', value: 'be' },
 				{ title: 'iOS', value: 'ios' },
 				{ title: '产品', value: 'pm' },
@@ -59,7 +61,12 @@ export default {
 			tabBarItems: [
 				{ title: '首页', icon: 'ly-icon ly-icon-home', value: 'home' },
 				{ title: '沸点', icon: 'ly-icon ly-icon-icon--', value: 'pins' },
-				{ title: '发现', icon: 'ly-icon ly-icon-sousuo', value: 'find' },
+				{
+					title: '发现',
+					icon: 'ly-icon ly-icon-sousuo',
+					value: 'find',
+					badge: 3
+				},
 				{ title: '我', icon: 'ly-icon ly-icon-wode', value: 'mine' }
 			]
 		};

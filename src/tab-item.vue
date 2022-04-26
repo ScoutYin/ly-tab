@@ -4,9 +4,14 @@
 		class="ly-tab-item"
 		@click="onItemClicked"
 	>
-		<slot name="icon" />
-		<div class="ly-tab-item-label">
-			<slot>{{ title }}</slot>
+		<div class="ly-tab-item__wrap">
+			<slot name="icon" />
+			<div class="ly-tab-item__label">
+				<slot>{{ title }}</slot>
+			</div>
+			<div v-if="badge" class="ly-tab-item__badge">
+				{{ badge }}
+			</div>
 		</div>
 	</div>
 </template>
@@ -16,7 +21,8 @@ export default {
 	name: 'LyTabItem',
 	props: {
 		title: String,
-		name: [String, Number]
+		name: [String, Number],
+		badge: [String, Number]
 	},
 	computed: {
 		activeStyle() {
@@ -42,5 +48,23 @@ export default {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+.ly-tab-item__wrap {
+	position: relative;
+}
+.ly-tab-item__badge {
+	position: absolute;
+	top: 4px;
+	right: -10px;
+	padding: 1px 4px;
+	min-width: 8px;
+	font-size: 9px;
+	line-height: 12px;
+	color: #fff;
+	background: #ff411c;
+	white-space: nowrap;
+	border-radius: 100px;
+	transform: translate(50%, -50%);
+	text-align: center;
 }
 </style>

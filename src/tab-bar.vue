@@ -54,4 +54,8 @@ export default {
 	flex: 1 1;
 	font-size: 12px;
 }
+.ly-tab-bar .ly-tab-item__badge {
+	top: 2px;
+	right: 0;
+}
 </style>
