@@ -9,7 +9,7 @@
 			/>
 		</ly-tabs>
 
-		<h3>请选择移动端调试模式或者真机调试</h3>
+		<h3>请使用移动端调试模式或者真机调试</h3>
 
 		<div class="demo-tab-bar">
 			<ly-tab-bar v-model="tabBarValue" @change="handleTabBarChange">
@@ -19,7 +19,9 @@
 					:title="item.title"
 					:name="item.value"
 				>
-					<i slot="icon" :class="item.icon"></i>
+					<template #icon>
+						<i :class="item.icon" />
+					</template>
 				</ly-tab-item>
 			</ly-tab-bar>
 		</div>
@@ -49,10 +51,10 @@ export default {
 				{ title: 'Android', value: 'android' },
 				{ title: '前端', value: 'fe' },
 				{ title: '后端', value: 'be' },
-				{ title: 'iOS', value: 'ios' }
-				// { title: '产品', value: 'pm' },
-				// { title: '人工智能', value: 'ai' },
-				// { title: '设计', value: 'design' }
+				{ title: 'iOS', value: 'ios' },
+				{ title: '产品', value: 'pm' },
+				{ title: '人工智能', value: 'ai' },
+				{ title: '设计', value: 'design' }
 			],
 			tabBarItems: [
 				{ title: '首页', icon: 'ly-icon ly-icon-home', value: 'home' },
@@ -64,13 +66,13 @@ export default {
 	},
 	mounted() {
 		// 模拟动态更新tabs
-		setTimeout(() => {
-			this.tabsItems.push(
-				{ title: '产品', value: 'pm' },
-				{ title: '人工智能', value: 'ai' },
-				{ title: '设计', value: 'design' }
-			);
-		}, 1000);
+		// setTimeout(() => {
+		// 	this.tabsItems.push(
+		// 		{ title: '产品', value: 'pm' },
+		// 		{ title: '人工智能', value: 'ai' },
+		// 		{ title: '设计', value: 'design' }
+		// 	);
+		// }, 1000);
 	},
 	methods: {
 		handleTabsChange(value) {
