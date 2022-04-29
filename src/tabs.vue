@@ -46,8 +46,8 @@ export default {
 				return v > 0;
 			}
 		},
-		// 灵敏度(惯性滑动时的灵敏度，值越小，阻力越大)，可近似认为速度减为零所需的时间(ms);
-		sensitivity: {
+		// 惯性滑动过程的持续时间，值越小，感知上阻力越大，可近似认为惯性滑动过程速度减为零所需的时间(ms);
+		inertialDuration: {
 			type: Number,
 			default: 1000,
 			validator(v) {
@@ -191,7 +191,7 @@ export default {
 				if (silenceTime > 100) return;
 
 				this.speed = (this.lastX - this.startX) / timeStamp;
-				this.acceleration = this.speed / this.sensitivity;
+				this.acceleration = this.speed / this.inertialDuration;
 				this.frameStartTime = Date.now();
 				this.inertiaFrame = requestAnimationFrame(this.moveByInertia);
 			}
@@ -419,7 +419,4 @@ export default {
 	text-align: center;
 	white-space: nowrap;
 }
-/* .ly-tabs .ly-tab-item__badge {
-	top: 6px;
-} */
 </style>
