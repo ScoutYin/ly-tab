@@ -138,11 +138,7 @@ export default {
 			// 避免在单次事件循环中重复执行多次计算逻辑，造成不必要的性能浪费
 			this.refreshTask = new Promise((resolve) => {
 				this.$nextTick(() => {
-					// 重新计算可视区宽度、
-					this.viewAreaWidth = this.$refs.viewArea.offsetWidth;
-					this.offsetX = this.$refs.list.offsetWidth - this.viewAreaWidth;
-					this.checkPosition();
-					this.calcLineOffset();
+					this.resize();
 					resolve();
 					this.refreshTask = null;
 				});
@@ -381,6 +377,17 @@ export default {
 		 */
 		addItem() {
 			this.refreshState();
+		},
+
+		/**
+		 * @expose
+		 */
+		resize() {
+			// 重新计算可视区宽度、
+			this.viewAreaWidth = this.$refs.viewArea.offsetWidth;
+			this.offsetX = this.$refs.list.offsetWidth - this.viewAreaWidth;
+			this.checkPosition();
+			this.calcLineOffset();
 		}
 	}
 };
