@@ -1,6 +1,6 @@
 {
   "name": "ly-tab",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "lib/ly-tab.common.js",
   "description": "A better mobile touch-swappable reusable component for vue2.*",
   "author": "ScoutYin <scoutyin.1900@gmail.com>",
@@ -13,9 +13,13 @@
     "start": "npm run dev",
     "build": "webpack --config build/webpack.config.js --mode production"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
@@ -44,8 +48,5 @@
     "last 2 versions",
     "not ie <= 8"
   ],
-  "license": "MIT",
-  "dependencies": {
-    "babel-loader": "^8.2.4"
-  }
+  "license": "MIT"
 }

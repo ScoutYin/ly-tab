@@ -1,3 +1,15 @@
+### 3.0.1 (2022-04-29)
+
+Fix:
+
+- 移除 babel-loader 生产依赖
+
+### 3.0.0 (2022-04-29)
+
+Features:
+
+- LyTabs、LyTabItem、LyTabBar 组件
+
 ### 2.1.3 (2022-04-16)
 
 Fixed:
@@ -20,7 +32,6 @@ Features:
 Fixed:
 
 - core：修复当默认选中item不在可视区时，tabbar未做位置调整使选中的item显示在可视区的bug
-
 
 ### 2.1.0 (2018-8-14)
 
