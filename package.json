@@ -4,6 +4,16 @@
   "main": "lib/ly-tab.common.js",
   "description": "A better mobile touch-swappable reusable component for vue2.*",
   "author": "ScoutYin <scoutyin.1900@gmail.com>",
+	"keywords": [
+    "Vue",
+    "components",
+    "mobile",
+    "swap",
+    "reusable",
+		"tabs",
+		"tabBar",
+		"tab"
+  ],
   "files": [
     "src",
     "lib"
@@ -13,6 +23,14 @@
     "start": "npm run dev",
     "build": "webpack --config build/webpack.config.js --mode production"
   },
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScoutYin/ly-tab.git"
+  },
+	"bugs": {
+    "url": "https://github.com/ScoutYin/ly-tab/issues"
+  },
+  "homepage": "https://github.com/ScoutYin/ly-tab",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
