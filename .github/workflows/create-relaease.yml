@@ -19,5 +19,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-					body: |
-						更新内容请参见 [CHANGELOG](https://github.com/ScoutYin/ly-tab/blob/master/CHANGELOG_CN.md)。
+          body: |
+            更新内容请参见 [CHANGELOG](https://github.com/ScoutYin/ly-tab/blob/master/CHANGELOG_CN.md)。
