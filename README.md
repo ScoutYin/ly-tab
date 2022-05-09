@@ -11,9 +11,9 @@
 
 ## 请注意：
 
-**ly-tab的2.x版本将不再更新维护，如果您使用的Vue版本是2.x，强烈建议您使用大于v3.0.0的ly-tab版本（对ly-tab@2.x重构优化后的版本）**
+**ly-tab 的 2.x 版本将不再更新维护，如果您使用的 Vue 版本是 2.x，强烈建议您使用大于 v3.0.0 的 ly-tab 版本（对 ly-tab 2.x版本重构优化后的版本）**
 
-**如果您使用的Vue版本是3.x，请[点击这里](https://github.com/ScoutYin/fun-tab)**
+**如果您使用的 Vue 版本是 3.x ，请[点击这里](https://github.com/ScoutYin/fun-tab)**
  
  **demo效果**
  
