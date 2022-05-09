@@ -1,10 +1,9 @@
 # Ly-Tab 3.x版本（非Vue3）
 
-3.x版本将和目前的2.x版本存在使用方法及API上的不兼容，使用者如需升级，请参照3.x版本。**强烈建议**使用3.x版本，2.x版本将不再进行更新维护。
+请注意，这个版本依然是 **Vue2** 版本。如果你想使用 **Vue3** 版本，请[点击这里](https://github.com/ScoutYin/fun-tab)。
 
-## Vue3版本
+当前的3.x版本和之前2.x版本存在使用方法及API上的不兼容，使用者如需升级，请参照3.x版本。**强烈建议**使用3.x版本，2.x版本将不再进行更新维护。
 
-如果你使用的是Vue3，请[点击这里](https://github.com/ScoutYin/fun-tab)
 ## 基本效果展示
 
 ![v3 0 0](https://user-images.githubusercontent.com/32835712/166098427-fef7c973-00aa-4a3a-82a5-41ce74dbe62f.gif)
