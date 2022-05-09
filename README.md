@@ -7,7 +7,13 @@
 
 > A better mobile touch-swappable reusable component for **Vue 2.0**
 
- 一个用于移动端的可触摸滑动具有回弹效果的可复用Vue组件
+ 一个用于移动端的可触摸滑动具有回弹效果的Vue组件
+
+## 请注意：
+
+**ly-tab的2.x版本将不再更新维护，如果您使用的Vue版本是2.x，强烈建议您使用大于v3.0.0的ly-tab版本（对ly-tab@2.x重构优化后的版本）**
+
+**如果您使用的Vue版本是3.x，请[点击这里](https://github.com/ScoutYin/fun-tab)**
  
  **demo效果**
  
@@ -44,10 +50,10 @@ Vue.use(LyTab)
 
 ```html
 <ly-tab
-    v-model="selectedId"
-    :items="items"
-    :options="options">
-</ly-tab>
+  v-model="selectedId"
+  :items="items"
+  :options="options"
+/>
 ```
 
 ```javascript
@@ -78,12 +84,8 @@ export default {
 > ly-tab 1.x版本使用方法：
 
 ```html
-<ly-tab
-  v-model="selectedId"
-  activeColor="#1d98bd">
-  <ly-tab-item
-    v-for="(item, index) in items"
-    :key="index">
+<ly-tab v-model="selectedId" activeColor="#1d98bd">
+  <ly-tab-item v-for="(item, index) in items" :key="index">
     {{item.label}}
   </ly-tab-item>
 </ly-tab>
@@ -125,7 +127,9 @@ export default {
 
 ## 可选的配置项：
 
-从2.0版本开始，配置项采用Object方式传入，1.x版本采用单个配置传入方式
+从2.0版本开始，配置项以`options`方式接收，1.x版本以每个配置属性单独作为组件`prop`接收
+
+`options`中的配置项：
 
  配置项 | 类型 | 描述 | 默认值 
 --------|---------|-------|-----
