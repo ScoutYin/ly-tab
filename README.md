@@ -72,13 +72,19 @@ export default {
 | additionalX | 近似等于超出边界时最大可拖动距离，单位 `px` | `number` | 50 |
 | reBoundExponent | 惯性回弹指数，值越大，惯性回弹距离越长 | `number` | 10 |
 | inertialDuration | 惯性滑动过程的持续时间，值越小，感知上阻力越大，可近似认为惯性滑动过程速度减为零所需的时间(ms) | `number` | 1000 |
-| reBoundingDuration | 回弹过程动画duration，单位 `ms` | `number` | 1000 |
+| reBoundingDuration | 回弹过程动画duration，单位 `ms` | `number` | 360 |
 
 ### 事件
 
 | 事件名 | 说明 | 回调参数 |
 | ----- | ---- | ----- |
 | change | 切换激活 tab 项的回调 | `name: string \| number` |
+
+### 方法
+
+| 方法名 | 说明 | 参数 | 返回值 |
+| ----- | ---- | ---- | ---- |
+| resize | 外层元素大小或组件布局、尺寸变化时，可以调用此方法来进行重绘 | - | - |
 
 ### 插槽
 
@@ -95,12 +101,6 @@ export default {
 | title | 选项卡显示文字 | `string` | - |
 | name | 选项卡标识符 | `string \| number` | 选项卡索引 |
 | badge | 右上角徽标内容 | `string \| number` | - |
-
-### 方法
-
-| 方法名 | 说明 | 参数 | 返回值 |
-| ----- | ---- | ---- | ---- |
-| resize | 外层元素大小或组件布局、尺寸变化时，可以调用此方法来进行重绘 | - | - |
 
 ### 插槽
 
